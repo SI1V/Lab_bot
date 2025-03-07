@@ -1,0 +1,39 @@
+{% extends "base/base.html" %}
+
+{% block title %}Профиль пациента{% endblock %}
+
+{% block content %}
+    <h1>Профиль пациента</h1>
+
+    <div>
+        <p><strong>Фамилия:</strong> {{ patient.pat_last_name }}</p>
+        <p><strong>Имя:</strong> {{ patient.pat_first_name }}</p>
+        <p><strong>Отчество:</strong> {{ patient.pat_middle_name if patient.pat_middle_name else 'Не указано' }}</p>
+        <p><strong>Дата рождения:</strong> {{ patient.pat_birth_date }}</p>
+        <p><strong>Пол:</strong> {{ patient.pat_gender }}</p>
+    </div>
+
+    <h2>Анализы</h2>
+    {% if patient.analyses %}
+        <table border="1" cellpadding="10" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Тип анализа</th>
+                    <th>Результат</th>
+                    <th>Дата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for analysis in patient.analyses %}
+                    <tr>
+                        <td>{{ analysis.analysis_type }}</td>
+                        <td>{{ analysis.result }}</td>
+                        <td>{{ analysis.date }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Анализы не найдены.</p>
+    {% endif %}
+{% endblock %}

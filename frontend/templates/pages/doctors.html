@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+
+{% block title %}Список докторов{% endblock %}
+
+{% block content %}
+    <h1>Список докторов</h1>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Специализация</th>
+                <th>Клиника</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doctor in doctors %}
+                <tr>
+                    <td>{{ doctor.doc_last_name }}</td>
+                    <td>{{ doctor.doc_first_name }}</td>
+                    <td>{{ doctor.doc_middle_name if doctor.doc_middle_name else 'Не указано' }}</td>
+                    <td>{{ doctor.doc_specialization }}</td>
+                    <td>{{ doctor.doc_clinic if doctor.doc_clinic else 'Не указано' }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base/base.html" %}
+
+{% block title %}Семейный архив - Главная{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <h1>Цифровой архив медицинских анализов</h1>
+            <div class="hero-buttons">
+                <a href="/auth/register" class="btn primary">Зарегистрироваться</a>
+                <a href="/auth/login" class="btn secondary">Войти</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature">
+        <img src="{{ url_for('static', path='img/security.png') }}" alt="Безопасность">
+        <h3>Безопасность</h3>
+        <p>Все данные зашифрованы и хранятся в защищенном облаке.</p>
+    </div>
+    <div class="feature">
+        <img src="{{ url_for('static', path='img/access.png') }}" alt="Доступ">
+        <h3>Удобный доступ</h3>
+        <p>Смотрите анализы в любое время с любого устройства.</p>
+    </div>
+    <div class="feature">
+        <img src="{{ url_for('static', path='img/history.png') }}" alt="История">
+        <h3>История</h3>
+        <p>Вся история анализов доступна в один клик.</p>
+    </div>
+</section>
+{% endblock %}

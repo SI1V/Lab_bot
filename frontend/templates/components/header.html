@@ -1,0 +1,16 @@
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static/img', path='logo.png') }}" alt="Лого">
+            </a>
+        </div>
+
+        {% include 'includes/navbar.html' %}
+
+        <div class="auth-buttons">
+            <a href="#" class="login-btn">Войти</a>
+            <a href="#" class="signup-btn">Регистрация</a>
+        </div>
+    </div>
+</header>

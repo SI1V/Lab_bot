@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+
+{% block title %}Список лабораторий{% endblock %}
+
+{% block content %}
+    <h1>Список лабораторий</h1>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Название лаборатории</th>
+                <th>Адрес</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lab in labs %}
+                <tr>
+                    <td>{{ lab.lab_name }}</td>
+                    <td>{{ lab.lab_address if lab.lab_address else '-' }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
