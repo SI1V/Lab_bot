@@ -8,6 +8,7 @@ from .laboratory import Laboratory
 from .research import ResearchCatalog
 from .patient import Patient
 from .analysis_result import AnalysisResult
+from .user import User
 
 __all__ = [
     "Base",
@@ -20,4 +21,5 @@ __all__ = [
     "ResearchCatalog",
     "Patient",
     "AnalysisResult",
+    "User"
 ]
