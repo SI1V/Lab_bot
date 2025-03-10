@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from backend.core.database import get_db
 from backend.services.analysis_service import (
@@ -10,10 +10,17 @@ from backend.core.templates import templates
 
 router = APIRouter(prefix="/analyses", tags=["Анализы"])
 
-@router.get("/", response_model=list[AnalysisResponse], summary="Получить список всех анализов",
-            description="Получить список всех анализов")
-async def get_all_analyses(db: AsyncSession = Depends(get_db)):
-    return await get_all_analyses_service(db)
+
+@router.get("/", response_model=list, summary="Получить все анализы")
+async def get_all_analyses(request: Request, db: AsyncSession = Depends(get_db)):
+    # Получаем все анализы из сервиса
+    analyses = await get_all_analyses_service(db)
+
+    # Рендерим шаблон и передаем данные анализов в шаблон
+    return templates.TemplateResponse("pages/analyses.html", {
+        "request": request,
+        "analyses": analyses
+    })
 
 @router.get("/{analysis_id}", response_model=AnalysisResponse, summary="Получить анализ по ID",
             description="Получить анализ по его уникальному идентификатору")

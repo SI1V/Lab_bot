@@ -12,23 +12,10 @@ from backend.core.templates import templates
 router = APIRouter(prefix="/labs", tags=["Лаборатории"])
 
 
-@router.get("/", summary="Получить все лаборатории")
+@router.get("/", response_model=list[LaboratoryResponse], summary="Получить все лаборатории")
 async def get_all_labs(request: Request, db: AsyncSession = Depends(get_db)):
-    """
-    Получает список всех лабораторий.
-    Возвращает HTML или JSON в зависимости от заголовка Accept.
-    """
-    # Получаем список лабораторий
     labs = await get_all_labs_service(db)
-
-    # Проверяем заголовок Accept в запросе
-    accept_header = request.headers.get("accept", "")
-
-    # Если запрос от браузера (HTML)
-    if "text/html" in accept_header:
-        return templates.TemplateResponse("pages/labs.html", {"request": request, "labs": labs})
-
-    # В противном случае (API-запрос, JSON)
+    labs = templates.TemplateResponse("pages/labs.html", {"request": request, "labs": labs})
     return labs
 
 @router.get("/{lab_id}", response_model=LaboratoryResponse, summary="Получить лабораторию по ID")

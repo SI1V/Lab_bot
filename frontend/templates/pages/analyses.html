@@ -1,0 +1,38 @@
+{% extends "base/base.html" %}
+
+{% block title %}Список анализов{% endblock %}
+
+{% block content %}
+    <h1>Список анализов</h1>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Пациент</th>
+                <th>Врач</th>
+                <th>Лаборатория</th>
+                <th>Исследование</th>
+                <th>Дата взятия образца</th>
+                <th>Дата получения образца</th>
+                <th>Результат напечатан</th>
+                <th>Возраст пациента (лет)</th>
+                <th>Комментарии</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for analysis in analyses %}
+                <tr>
+                    <td>{{ analysis.patient_name if analysis.patient_name else 'Не указан' }}</td>
+                    <td>{{ analysis.doctor_name if analysis.doctor_name else 'Не указан' }}</td>
+                    <td>{{ analysis.laboratory_name if analysis.laboratory_name else 'Не указана' }}</td>
+                    <td>{{ analysis.research_name if analysis.research_name else 'Не указано' }}</td>
+                    <td>{{ analysis.ana_sample_taken.strftime('%Y-%m-%d %H:%M') if analysis.ana_sample_taken else '-' }}</td>
+                    <td>{{ analysis.ana_sample_received.strftime('%Y-%m-%d %H:%M') if analysis.ana_sample_received else '-' }}</td>
+                    <td>{{ analysis.ana_result_printed.strftime('%Y-%m-%d %H:%M') if analysis.ana_result_printed else '-' }}</td>
+                    <td>{{ analysis.ana_age_years }} лет, {{ analysis.ana_age_months }} месяцев</td>
+                    <td>{{ analysis.ana_comment if analysis.ana_comment else '-' }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

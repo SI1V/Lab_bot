@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{#Чем layout.html отличается от base.html?#}
+{##}
+{#layout.html наследует base.html ({% extends "base/base.html" %}).#}
+{#Добавляет боковую панель (sidebar), например, для личного кабинета.#}
+{#Вводит новый блок {% block page_content %}, который будут переопределять страницы внутри админки.#}
 
-</body>
-</html>
+{% extends "base/base.html" %}
+
+{% block content %}
+    <div class="sidebar">
+        {% include "components/sidebar.html" %}
+    </div>
+    <div class="main-content">
+        {% block page_content %}{% endblock %}
+    </div>
+{% endblock %}

@@ -15,17 +15,8 @@ router = APIRouter(prefix="/doctors", tags=["Доктора"])
 
 @router.get("/", response_model=list[DoctorResponse], summary="Получить список всех докторов")
 async def get_all_doctors(request: Request, db: AsyncSession = Depends(get_db)):
-    # Получаем всех докторов
     doctors = await get_all_doctors_service(db)
-
-    # Проверка, если запрос от браузера (для рендеринга HTML)
-    accept_header = request.headers.get('accept', '')
-
-    if 'text/html' in accept_header:
-        # Рендерим шаблон с данными о докторах
-        return templates.TemplateResponse("pages/doctors.html", {"request": request, "doctors": doctors})
-
-    # В противном случае, возвращаем данные в JSON
+    doctors =  templates.TemplateResponse("pages/doctors.html", {"request": request, "doctors": doctors})
     return doctors
 
 
